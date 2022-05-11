@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo "Workspace is $WORKSPACE"
                 script{
-                    docker.withRegistry('https://index.docker.io/','DockerHub'){
+                    docker.withRegistry('https://hub.docker.com/','DockerHub'){
                         def image = docker.build('jibranhaseeb/python-flask-app')
                         image.push()
                     }
