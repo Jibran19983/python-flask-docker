@@ -47,13 +47,21 @@ pipeline{
 		}
 		stage('test cluster') {
 
-			steps {
+			steps{
 				script{
-					def j = sh (script:'curl -s -o /dev/null -w "%{http_code}\n" http://www.google.com/',returnStdout:true)
-					// println j
-				}
-				
+					withKubeConfig([credentialsId: 'Kubernetes', serverUrl: 'https://127.0.0.1:6443']) {
+					sleep 10
+					def ip = sh script: 'kubectl get service/my-flask-service -o jsonpath="{.spec.clusterIP}"', returnStdout: true
+          			ip = ip.trim()
+					def result = sh script:'curl -s -o /dev/null -w "%{http_code}" ${ip}:8080'
+					if(result==200){
+						echo "Pipeline Implemented Successfully"
+					}
+					else:
+					error("Test Failed")
+    		}
 
+			}
 			}
 		}
 	}
