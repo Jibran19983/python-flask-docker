@@ -34,15 +34,16 @@ pipeline{
 			steps{
 				script{
 					withKubeConfig([credentialsId: 'Kubernetes', serverUrl: 'https://127.0.0.1:6443']) {
-      				sh 'kubectl get pods'
+      				sh 'kubectl delete -f ./cluster/flask-app.yml'
+					sh 'kubectl create -f ./cluster/flask-app.yml'
+					sleep 30
+					def ip = sh script: 'kubectl get service/my-flask-service -o jsonpath="{.spec.clusterIP}"', returnStdout: true
+          			ip = ip.trim()
+					println ip
     		}
 
 			}
 			}
-			
-				// steps {
-				// 	sh 'kubectl get 	pods'
-				// }
 		}
 		stage('test cluster') {
 
