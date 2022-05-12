@@ -33,7 +33,7 @@ pipeline{
 		stage('Deploy the image in kubernetes cluster') {
 
 			steps {
-				sh 'kubectl get pods'
+				sh 'kubectl create -f cluster flask-app.yml'
 			}
 		}
 	}
