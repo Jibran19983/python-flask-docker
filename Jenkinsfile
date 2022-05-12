@@ -28,6 +28,13 @@ pipeline{
 				sh 'docker push jibranhaseeb/python-flask-app:latest'
 			}
 		}
+
+		stage('Deploy the image in kubernetes cluster') {
+
+			steps {
+				sh 'kubectl create -f ./cluster/flask-app.yml'
+			}
+		}
 	}
 
 	post {
