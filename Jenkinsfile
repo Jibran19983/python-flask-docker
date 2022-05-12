@@ -33,7 +33,7 @@ pipeline{
 		stage('Deploy the image in kubernetes cluster') {
 			steps{
 				script{
-					withKubeConfig([credentialsId: 'KubernetesFile2', serverUrl: '127.0.0.1']) {
+					withKubeConfig([credentialsId: 'Kubernetes', serverUrl: '127.0.0.1']) {
       				sh 'kubectl get pods'
     		}
 
