@@ -9,31 +9,40 @@ pipeline{
 
 	stages {
 
-		stage('Building Image') {
+		// stage('Building Image') {
 
-			steps {
-				sh 'docker build -t jibranhaseeb/python-flask-app:latest .'
-			}
-		}
+		// 	steps {
+		// 		sh 'docker build -t jibranhaseeb/python-flask-app:latest .'
+		// 	}
+		// }
 
-		stage('Login') {
+		// stage('Login') {
 
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
+		// 	steps {
+		// 		sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+		// 	}
+		// }
 
-		stage('Push') {
+		// stage('Push') {
 
-			steps {
-				sh 'docker push jibranhaseeb/python-flask-app:latest'
-			}
-		}
+		// 	steps {
+		// 		sh 'docker push jibranhaseeb/python-flask-app:latest'
+		// 	}
+		// }
 
 		stage('Deploy the image in kubernetes cluster') {
 
 			steps {
 				sh 'kubectl create -f cluster/flask-app.yml'
+			}
+		}
+		stage('test cluster') {
+
+			steps {
+				def j = sh (script:'curl -s -o /dev/null -w "%{http_code}\n" http://www.google.com/
+',returnStdout:true)
+				println j
+
 			}
 		}
 	}
