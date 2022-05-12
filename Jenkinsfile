@@ -69,8 +69,13 @@ pipeline{
 			sh 'docker logout'
 		}
 		success{
-			emailext body: 'Test Message',
-    		subject: 'Test Subject',
+			emailext body: 'Your pipeline is successfully built',
+    		subject: 'Pipeline Successful',
+    		to: 'jibran19983@gmail.com'
+		}
+		failure{
+			emailext body: 'Your pipeline failes',
+    		subject: 'Pipeline Failes',
     		to: 'jibran19983@gmail.com'
 		}
 	}
