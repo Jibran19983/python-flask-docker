@@ -69,9 +69,16 @@ pipeline{
 			sh 'docker logout'
 		}
 		success{
+			script{
+					withCredentials([string(credentialsId: 'EmailAddress', variable: 'EMAIL')]) { //set SECRET with the credential content
+        	echo "My secret text is '${EMAIL}'"
 			emailext body: 'Your pipeline is successfully built',
     		subject: 'Pipeline Successful',
-    		to: 'jibran19983@gmail.com'
+    		to: EMAIL
+			}
+			
+    }
+			
 		}
 		failure{
 			emailext body: 'Your pipeline failes',
