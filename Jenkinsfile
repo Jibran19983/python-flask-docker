@@ -4,6 +4,7 @@ pipeline{
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('DockerHub')
+		KUBECONFIG="/etc/rancher/rke2/rke3.yaml"
 	}
 
 	stages {
@@ -32,7 +33,7 @@ pipeline{
 		stage('Deploy the image in kubernetes cluster') {
 
 			steps {
-				sh 'kubectl create -f ./cluster/flask-app.yml'
+				sh 'kubectl get pods'
 			}
 		}
 	}
