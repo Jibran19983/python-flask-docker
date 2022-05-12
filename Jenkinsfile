@@ -50,7 +50,7 @@ pipeline{
 					def ip = sh script: 'kubectl get service/my-flask-service -o jsonpath="{.spec.clusterIP}"', returnStdout: true
           			ip = ip.trim()
 					def result = sh script:"curl -s -o /dev/null -w '%{http_code}' ${ip}:8080", returnStdout: true
-					if(result==200){
+					if(result=="200"){
 						echo "Pipeline Implemented Successfully"
 					}
 					else{
