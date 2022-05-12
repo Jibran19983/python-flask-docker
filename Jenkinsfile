@@ -70,8 +70,7 @@ pipeline{
 		}
 		success{
 			script{
-					withCredentials([string(credentialsId: 'EmailAddress', variable: 'EMAIL')]) { //set SECRET with the credential content
-					echo "My secret text is '${EMAIL}'"
+					withCredentials([string(credentialsId: 'EmailAddress', variable: 'EMAIL')]) {
 					emailext body: 'Your pipeline is successfully built',
 					subject: 'Pipeline Successful',
 					to: EMAIL
@@ -82,8 +81,7 @@ pipeline{
 		}
 		failure{
 			script{
-					withCredentials([string(credentialsId: 'EmailAddress', variable: 'EMAIL')]) { //set SECRET with the credential content
-					echo "My secret text is '${EMAIL}'"
+					withCredentials([string(credentialsId: 'EmailAddress', variable: 'EMAIL')]) { 
 					emailext body: 'Your pipeline failes',
 					subject: 'Pipeline Failed',
 					to: EMAIL
