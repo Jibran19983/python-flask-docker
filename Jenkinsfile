@@ -71,7 +71,7 @@ pipeline{
 		success{
 			emailext body: 'Test Message',
     		subject: 'Test Subject',
-    		to: 'jiban19983@gmail.com'
+    		to: 'jibran19983@gmail.com'
 		}
 	}
 
