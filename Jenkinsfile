@@ -57,8 +57,10 @@ pipeline{
 					if(result==200){
 						echo "Pipeline Implemented Successfully"
 					}
-					else:
-					error("Test Failed")
+					else{
+						error("Test Failed")
+					}
+					
     		}
 
 			}
