@@ -30,12 +30,12 @@ pipeline{
 		// 	}
 		// }
 
-		// stage('Deploy the image in kubernetes cluster') {
+		stage('Deploy the image in kubernetes cluster') {
 
-		// 	steps {
-		// 		sh 'kubectl create -f cluster/flask-app.yml'
-		// 	}
-		// }
+			steps {
+				sh 'kubectl get pods'
+			}
+		}
 		stage('test cluster') {
 
 			steps {
