@@ -41,7 +41,7 @@ pipeline{
 			steps {
 				script{
 					def j = sh (script:'curl -s -o /dev/null -w "%{http_code}\n" http://www.google.com/',returnStdout:true)
-					println j
+					// println j
 				}
 				
 
