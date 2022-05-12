@@ -68,6 +68,11 @@ pipeline{
 		always {
 			sh 'docker logout'
 		}
+		success{
+			emailext body: 'Test Message',
+    		subject: 'Test Subject',
+    		to: 'jiban19983@gmail.com'
+		}
 	}
 
 }
