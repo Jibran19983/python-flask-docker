@@ -12,7 +12,7 @@ pipeline{
 		stage('Building Image from file') {
 
 			steps {
-				sh 'docker build -t jibranhaseeb/python-flask-app:latest .'
+				sh 'docker build -t jibranhaseeb/python-flask-app:alpha .'
 			}
 		}
 
@@ -26,42 +26,42 @@ pipeline{
 		stage('Push Image') {
 
 			steps {
-				sh 'docker push jibranhaseeb/python-flask-app:latest'
+				sh 'docker push jibranhaseeb/python-flask-app:alpha'
 			}
 		}
 
-		stage('Deploy the image in kubernetes cluster') {
-			steps{
-				script{
-					withKubeConfig([credentialsId: 'Kubernetes', serverUrl: 'https://127.0.0.1:6443']) {
-      				sh 'kubectl delete -f ./cluster/flask-app.yml'
-					sh 'kubectl create -f ./cluster/flask-app.yml'
-    		}
+		// stage('Deploy the image in kubernetes cluster') {
+		// 	steps{
+		// 		script{
+		// 			withKubeConfig([credentialsId: 'Kubernetes', serverUrl: 'https://127.0.0.1:6443']) {
+      	// 			sh 'kubectl delete -f ./cluster/flask-app.yml'
+		// 			sh 'kubectl create -f ./cluster/flask-app.yml'
+    	// 	}
 
-			}
-			}
-		}
-		stage('Testing the Web app') {
+		// 	}
+		// 	}
+		// }
+		// stage('Testing the Web app') {
 
-			steps{
-				script{
-					withKubeConfig([credentialsId: 'Kubernetes', serverUrl: 'https://127.0.0.1:6443']) {
-					sleep 10
-					def ip = sh script: 'kubectl get service/my-flask-service -o jsonpath="{.spec.clusterIP}"', returnStdout: true
-          			ip = ip.trim()
-					def result = sh script:"curl -s -o /dev/null -w '%{http_code}' ${ip}:8080", returnStdout: true
-					if(result=="200"){
-						echo "Pipeline Implemented Successfully"
-					}
-					else{
-						error("Test Failed")
-					}
+		// 	steps{
+		// 		script{
+		// 			withKubeConfig([credentialsId: 'Kubernetes', serverUrl: 'https://127.0.0.1:6443']) {
+		// 			sleep 10
+		// 			def ip = sh script: 'kubectl get service/my-flask-service -o jsonpath="{.spec.clusterIP}"', returnStdout: true
+        //   			ip = ip.trim()
+		// 			def result = sh script:"curl -s -o /dev/null -w '%{http_code}' ${ip}:8080", returnStdout: true
+		// 			if(result=="200"){
+		// 				echo "Pipeline Implemented Successfully"
+		// 			}
+		// 			else{
+		// 				error("Test Failed")
+		// 			}
 					
-    		}
+    	// 	}
 
-			}
-			}
-		}
+		// 	}
+		// 	}
+		// }
 	}
 
 	post {
