@@ -9,26 +9,26 @@ pipeline{
 
 	stages {
 
-		// stage('Building Image') {
+		stage('Building Image') {
 
-		// 	steps {
-		// 		sh 'docker build -t jibranhaseeb/python-flask-app:latest .'
-		// 	}
-		// }
+			steps {
+				sh 'docker build -t jibranhaseeb/python-flask-app:latest .'
+			}
+		}
 
-		// stage('Login') {
+		stage('Login to Docker Hub') {
 
-		// 	steps {
-		// 		sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-		// 	}
-		// }
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
 
-		// stage('Push') {
+		stage('Push Image') {
 
-		// 	steps {
-		// 		sh 'docker push jibranhaseeb/python-flask-app:latest'
-		// 	}
-		// }
+			steps {
+				sh 'docker push jibranhaseeb/python-flask-app:latest'
+			}
+		}
 
 		stage('Deploy the image in kubernetes cluster') {
 			steps{
@@ -41,7 +41,7 @@ pipeline{
 			}
 			}
 		}
-		stage('test cluster') {
+		stage('Testing the Web app') {
 
 			steps{
 				script{
