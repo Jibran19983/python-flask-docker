@@ -34,8 +34,7 @@ pipeline{
 		// 	steps{
 		// 		script{
 		// 			withKubeConfig([credentialsId: 'Kubernetes', serverUrl: 'https://127.0.0.1:6443']) {
-      	// 			sh 'kubectl delete -f ./cluster/flask-app.yml'
-		// 			sh 'kubectl create -f ./cluster/flask-app.yml'
+      	// 			sh 'kubectl apply -f ./cluster/flask-app.yml'
     	// 	}
 
 		// 	}
