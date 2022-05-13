@@ -9,7 +9,7 @@ pipeline{
 
 	stages {
 
-		stage('Building Image') {
+		stage('Building Image from file') {
 
 			steps {
 				sh 'docker build -t jibranhaseeb/python-flask-app:latest .'
