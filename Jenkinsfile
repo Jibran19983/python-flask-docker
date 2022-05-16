@@ -45,6 +45,7 @@ pipeline{
 			steps{
 				script{
 					withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
+						sh ("git init")
                         sh("git push https://${SECRET}@github.com/Jibran19983/python-flask-docker.git master")
 						
                     }
