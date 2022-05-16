@@ -154,5 +154,8 @@ pipeline{
 			
 		}
 	}
+	aborted {
+            deleteDir()
+        }
 }
 }
