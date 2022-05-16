@@ -10,12 +10,25 @@ pipeline{
 
 	stages {
 
+		// stage('Skip Build') {
+        //         steps {
+        //             scmSkip(skipPattern:'.*\\[ci skip\\].*')
+        //         }
+        //     }
 		stage('Skip Build') {
                 steps {
-                    scmSkip(skipPattern:'.*\\[ci skip\\].*')
+					script{
+						def result = sh (script: "git log -1 | grep '\\[ci skip\\]'", returnStatus: true) 
+						if (result != 0) {
+						echo "performing build..."
+						} else {
+							currentBuild.result = 'ABORTED'
+							error('Stopping early…')
+						}
+					}
+                    
                 }
             }
-
 		stage('Building Image') {
 
 			steps {
@@ -47,7 +60,8 @@ pipeline{
 					withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
 						sh ("git checkout master")
 						sh ("git merge origin/master")
-						sh ("git commit -am '[ci skip]'")
+						sh ("git add .")
+						sh ("git commit -m '[ci skip]'")
 						
                     }
 				}
