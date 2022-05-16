@@ -5,7 +5,7 @@ pipeline{
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('DockerHub')
 		// KUBECONFIG="/etc/rancher/rke2/rke3.yaml"
-		TAG = "latest"
+		TAG = "alpha"
 	}
 
 	stages {
@@ -49,6 +49,12 @@ pipeline{
 				sh "docker push jibranhaseeb/python-flask-app:${TAG}"
 			}
 		}
+
+		stage("git pull"){
+			steps{
+				sh ("git pull")
+			}
+		}
 		stage("changing the tag in the file"){
 			steps{
 				sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
@@ -59,7 +65,7 @@ pipeline{
 				script{
 					withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
 						sh ("git checkout master")
-						sh ("git merge origin/master")
+						// sh ("git merge origin/master")
 						sh ("git add .")
 						sh ("git commit -m '[ci skip]'")
 						
