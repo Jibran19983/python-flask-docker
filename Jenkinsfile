@@ -60,7 +60,8 @@ pipeline{
 					withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
 						sh ("git checkout master")
 						sh ("git merge origin/master")
-						sh ("git commit -am '[ci skip]'")
+						sh ("git add .")
+						sh ("git commit -m '[ci skip]'")
 						
                     }
 				}
