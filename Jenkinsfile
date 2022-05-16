@@ -5,7 +5,7 @@ pipeline{
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('DockerHub')
 		// KUBECONFIG="/etc/rancher/rke2/rke3.yaml"
-		TAG = "alpha"
+		TAG = "latest"
 	}
 
 	stages {
@@ -74,8 +74,8 @@ pipeline{
 						sh "git branch --show-current"
 						sh "git rebase origin/master"
 						// sh ("git merge origin/master")
-						// sh ("git add -A")
-						// sh ("git commit -m '[ci skip]'")
+						sh ("git add -A")
+						sh ("git commit -m '[ci skip]'")
 						
                     }
 				}
