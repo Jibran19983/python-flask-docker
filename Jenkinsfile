@@ -38,7 +38,7 @@ pipeline{
 		}
 		stage{
 			steps{
-				sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
+				sh "sed -i 's|newTag: .*|newTag: latest|' ./cluster/kustomization.yaml"
 			}
 		}
 		// stage('Deploy the image in kubernetes cluster') {
