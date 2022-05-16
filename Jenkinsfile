@@ -5,7 +5,7 @@ pipeline{
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('DockerHub')
 		// KUBECONFIG="/etc/rancher/rke2/rke3.yaml"
-		TAG = "alpha"
+		TAG = "latest"
 	}
 
 	stages {
@@ -83,13 +83,13 @@ pipeline{
 				}
 			}
 		}
-		stage("changing the file"){
-			steps{
-				sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
-				sh "echo ${TAG}"
-				sh "cat ./cluster/kustomization.yaml"
-			}
-		}
+		// stage("changing the file"){
+		// 	steps{
+		// 		sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
+		// 		sh "echo ${TAG}"
+		// 		sh "cat ./cluster/kustomization.yaml"
+		// 	}
+		// }
 		// stage('Deploy the image in kubernetes cluster') {
 		// 	steps{
 		// 		script{
