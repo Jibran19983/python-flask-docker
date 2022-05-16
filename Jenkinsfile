@@ -53,7 +53,7 @@ pipeline{
 		stage("git pull"){
 			steps{
 				withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
-				// sh("git fetch https://${SECRET}@github.com/Jibran19983/python-flask-docker.git master --force")
+				sh("git pull https://${SECRET}@github.com/Jibran19983/python-flask-docker.git master --force")
 				sh "git checkout master"
 				}
 
