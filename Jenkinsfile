@@ -53,13 +53,6 @@ pipeline{
 				}
 			}
 		}
-		stage("Git Push"){
-			steps{
-				withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
-				sh("git push https://${SECRET}@github.com/Jibran19983/python-flask-docker.git master")
-				}
-			}
-		}
 		// stage('Deploy the image in kubernetes cluster') {
 		// 	steps{
 		// 		script{
@@ -96,6 +89,11 @@ pipeline{
 	post {
 		always {
 			sh 'docker logout'
+			script{
+				withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
+				sh("git push https://${SECRET}@github.com/Jibran19983/python-flask-docker.git master --force")
+				}
+			}
 		}
 		success{
 			script{
