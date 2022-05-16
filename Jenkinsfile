@@ -52,7 +52,7 @@ pipeline{
 
 		stage("git pull"){
 			steps{
-				sh ("git pull")
+				sh ("git pull master")
 			}
 		}
 		stage("changing the tag in the file"){
