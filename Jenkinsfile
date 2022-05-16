@@ -54,16 +54,19 @@ pipeline{
 				sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
 			}
 		}
-		// stage("pushing to git"){
-		// 	steps{
-		// 		script{
-		// 			withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
+		stage("pushing to git"){
+			steps{
+				script{
+					withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
+						sh ("git checkout master")
+						sh ("git merge origin/master")
+						sh ("git add .")
+						sh ("git commit -m '[ci skip]'")
 						
-						
-        //             }
-		// 		}
-		// 	}
-		// }
+                    }
+				}
+			}
+		}
 		// stage('Deploy the image in kubernetes cluster') {
 		// 	steps{
 		// 		script{
@@ -102,10 +105,6 @@ pipeline{
 			sh 'docker logout'
 			script{
 				withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
-					sh ("git checkout master")
-						// sh ("git merge origin/master")
-						sh ("git add .")
-						sh ("git commit -m '[ci skip]'")
 				sh("git push https://${SECRET}@github.com/Jibran19983/python-flask-docker.git master --force")
 				}
 			}
