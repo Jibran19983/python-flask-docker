@@ -72,7 +72,7 @@ pipeline{
 					withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
 						sh "git branch --show-current"
 						// sh ("git checkout master")
-						sh "git branch --show-current"
+						sh "git pull https://${SECRET}@github.com/Jibran19983/python-flask-docker.git"
 						sh ("git add -A")
 						sh ("git commit -m '[ci skip]'")
 						sh "git rebase origin/master"
