@@ -46,6 +46,7 @@ pipeline{
 				script{
 					withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
 						sh ("git checkout master")
+						sh ("git merge origin/master")
 						sh ("git commit -am '[ci skip]'")
                         sh("git push https://${SECRET}@github.com/Jibran19983/python-flask-docker.git master")
 						
