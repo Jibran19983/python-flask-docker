@@ -62,6 +62,7 @@ pipeline{
 			steps{
 				sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
 				sh "echo ${TAG}"
+				sh "cat ./cluster/kustomization.yaml"
 			}
 		}
 		stage("pushing to git"){
@@ -84,6 +85,7 @@ pipeline{
 			steps{
 				sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
 				sh "echo ${TAG}"
+				sh "cat ./cluster/kustomization.yaml"
 			}
 		}
 		// stage('Deploy the image in kubernetes cluster') {
