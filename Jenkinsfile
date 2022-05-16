@@ -72,7 +72,7 @@ pipeline{
 						sh ("git checkout master")
 						sh "git branch --show-current"
 						// sh ("git merge origin/master")
-						sh ("git add .")
+						sh ("git add -A")
 						sh ("git commit -m '[ci skip]'")
 						
                     }
