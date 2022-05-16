@@ -50,14 +50,14 @@ pipeline{
 			}
 		}
 
-		stage("git pull"){
-			steps{
-				withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
-				sh("git fetch https://${SECRET}@github.com/Jibran19983/python-flask-docker.git master --force")
-				}
+		// stage("git pull"){
+		// 	steps{
+		// 		withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
+		// 		sh("git fetch https://${SECRET}@github.com/Jibran19983/python-flask-docker.git master --force")
+		// 		}
 
-			}
-		}
+		// 	}
+		// }
 		stage("changing the tag in the file"){
 			steps{
 				sh "ls"
@@ -68,7 +68,7 @@ pipeline{
 			steps{
 				script{
 					withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
-						// sh ("git checkout master")
+						sh ("git checkout master")
 						// sh ("git merge origin/master")
 						sh ("git add .")
 						sh ("git commit -m '[ci skip]'")
