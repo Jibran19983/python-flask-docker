@@ -38,7 +38,17 @@ pipeline{
 		}
 		stage("changing the tag in the file"){
 			steps{
-				sh "sed -i 's|newTag: .*|newTag: latest|' ./cluster/kustomization.yaml"
+				sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
+			}
+		}
+		stage("pushing to git"){
+			steps{
+				script{
+					withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
+                        sh("git push https://${SECRET}@github.com/Jibran19983/python-flask-docker.git")
+						
+                    }
+				}
 			}
 		}
 		// stage('Deploy the image in kubernetes cluster') {
