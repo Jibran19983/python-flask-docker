@@ -52,7 +52,10 @@ pipeline{
 
 		stage("git pull"){
 			steps{
-				sh ("git pull master")
+				withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
+				sh("git pull https://${SECRET}@github.com/Jibran19983/python-flask-docker.git master --force")
+				}
+
 			}
 		}
 		stage("changing the tag in the file"){
