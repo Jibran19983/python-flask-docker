@@ -9,6 +9,12 @@ pipeline{
 
 	stages {
 
+		stage('Skip Build') {
+                steps {
+                    scmSkip(deleteBuild: true, skipPattern:'.*\\[ci skip\\].*')
+                }
+            }
+
 		stage('Building Image from file') {
 
 			steps {
