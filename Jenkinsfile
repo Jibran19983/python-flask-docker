@@ -5,6 +5,7 @@ pipeline{
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('DockerHub')
 		// KUBECONFIG="/etc/rancher/rke2/rke3.yaml"
+		TAG = 'alpha'
 	}
 
 	stages {
@@ -18,7 +19,7 @@ pipeline{
 		stage('Building Image') {
 
 			steps {
-				sh 'docker build -t jibranhaseeb/python-flask-app:alpha .'
+				sh "docker build -t jibranhaseeb/python-flask-app:${TAG} ."
 			}
 		}
 
@@ -32,10 +33,14 @@ pipeline{
 		stage('Push Image') {
 
 			steps {
-				sh 'docker push jibranhaseeb/python-flask-app:alpha'
+				sh "docker push jibranhaseeb/python-flask-app:${TAG}"
 			}
 		}
-
+		stage{
+			steps{
+				sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
+			}
+		}
 		// stage('Deploy the image in kubernetes cluster') {
 		// 	steps{
 		// 		script{
