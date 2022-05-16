@@ -9,11 +9,11 @@ pipeline{
 
 	stages {
 
-		// stage('Skip the Build') {
-        //         steps {
-        //             scmSkip(deleteBuild: true, skipPattern:'.*\\[ci skip\\].*')
-        //         }
-        //     }
+		stage('Skip the Build') {
+                steps {
+                    scmSkip(deleteBuild: true, skipPattern:'.*\\[ci skip\\].*')
+                }
+            }
 
 		stage('Building Image') {
 
