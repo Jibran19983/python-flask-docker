@@ -80,7 +80,7 @@ pipeline{
 				}
 			}
 		}
-		stage("changing the tag in the file"){
+		stage("changing the file"){
 			steps{
 				sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
 				sh "echo ${TAG}"
