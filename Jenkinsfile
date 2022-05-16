@@ -9,7 +9,7 @@ pipeline{
 
 	stages {
 
-		stage('Skip the Build') {
+		stage('Skip Build') {
                 steps {
                     scmSkip(deleteBuild: true, skipPattern:'.*\\[ci skip\\].*')
                 }
