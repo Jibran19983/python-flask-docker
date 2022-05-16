@@ -5,7 +5,7 @@ pipeline{
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('DockerHub')
 		// KUBECONFIG="/etc/rancher/rke2/rke3.yaml"
-		TAG = "alpha"
+		TAG = "lite"
 	}
 
 	stages {
