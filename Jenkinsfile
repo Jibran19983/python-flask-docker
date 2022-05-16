@@ -71,6 +71,7 @@ pipeline{
 						sh "git branch --show-current"
 						sh ("git checkout master")
 						sh "git branch --show-current"
+						sh "git rebase origin/master"
 						// sh ("git merge origin/master")
 						sh ("git add -A")
 						sh ("git commit -m '[ci skip]'")
