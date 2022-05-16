@@ -4,4 +4,4 @@ resources:
   - ./flask-app.yml
 images:
   - name: jibranhaseeb/python-flask-app
-    newTag: lite
+    newTag: latest
