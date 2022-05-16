@@ -5,7 +5,7 @@ pipeline{
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('DockerHub')
 		// KUBECONFIG="/etc/rancher/rke2/rke3.yaml"
-		TAG = 'alpha'
+		TAG = "alpha"
 	}
 
 	stages {
@@ -36,7 +36,7 @@ pipeline{
 				sh "docker push jibranhaseeb/python-flask-app:${TAG}"
 			}
 		}
-		stage{
+		stage("changing the tag in the file"){
 			steps{
 				sh "sed -i 's|newTag: .*|newTag: latest|' ./cluster/kustomization.yaml"
 			}
