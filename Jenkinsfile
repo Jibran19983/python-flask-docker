@@ -60,8 +60,8 @@ pipeline{
 		// }
 		stage("changing the tag in the file"){
 			steps{
-				sh "ls"
 				sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
+				sh "echo ${TAG}"
 			}
 		}
 		stage("pushing to git"){
@@ -78,6 +78,12 @@ pipeline{
 						
                     }
 				}
+			}
+		}
+		stage("changing the tag in the file"){
+			steps{
+				sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
+				sh "echo ${TAG}"
 			}
 		}
 		// stage('Deploy the image in kubernetes cluster') {
