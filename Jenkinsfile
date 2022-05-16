@@ -63,8 +63,6 @@ pipeline{
 		stage("changing the tag in the file"){
 			steps{
 				sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
-				sh "echo ${TAG}"
-				sh "cat ./cluster/kustomization.yaml"
 			}
 		}
 		stage("pushing to git"){
@@ -72,25 +70,15 @@ pipeline{
 				script{
 					withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
 						sh "git branch --show-current"
-						// sh ("git checkout master")
-						// sh "git pull https://${SECRET}@github.com/Jibran19983/python-flask-docker.git"
 						sh ("git add -A")
 						sh ("git commit -m '[ci skip]'")
-						// sh "git rebase origin/master"
-						// sh ("git merge origin/master")
+						
 						
 						
                     }
 				}
 			}
 		}
-		// stage("changing the file"){
-		// 	steps{
-		// 		sh "sed -i 's|newTag: .*|newTag: ${TAG}|' ./cluster/kustomization.yaml"
-		// 		sh "echo ${TAG}"
-		// 		sh "cat ./cluster/kustomization.yaml"
-		// 	}
-		// }
 		// stage('Deploy the image in kubernetes cluster') {
 		// 	steps{
 		// 		script{
