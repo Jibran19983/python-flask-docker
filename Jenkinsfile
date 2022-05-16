@@ -139,7 +139,9 @@ pipeline{
 					subject: 'Pipeline Failed',
 					to: EMAIL
 			}
-			
+			if (currentBuild.result == 'ABORTED'){
+				 deleteDir()
+			}
 		}
 	}
 	aborted {
