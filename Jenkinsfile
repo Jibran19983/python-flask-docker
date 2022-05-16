@@ -15,7 +15,7 @@ pipeline{
         //         }
         //     }
 
-		stage('Building Image from file') {
+		stage('Building Image') {
 
 			steps {
 				sh 'docker build -t jibranhaseeb/python-flask-app:alpha .'
