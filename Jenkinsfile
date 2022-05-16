@@ -5,7 +5,7 @@ pipeline{
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('DockerHub')
 		// KUBECONFIG="/etc/rancher/rke2/rke3.yaml"
-		TAG = "latest"
+		TAG = "alpha"
 	}
 
 	stages {
@@ -75,7 +75,7 @@ pipeline{
 						// sh "git pull https://${SECRET}@github.com/Jibran19983/python-flask-docker.git"
 						sh ("git add -A")
 						sh ("git commit -m '[ci skip]'")
-						sh "git rebase origin/master"
+						// sh "git rebase origin/master"
 						// sh ("git merge origin/master")
 						
 						
