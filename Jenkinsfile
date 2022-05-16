@@ -68,7 +68,8 @@ pipeline{
 			steps{
 				script{
 					withCredentials([string(credentialsId: 'Git', variable: 'SECRET')]) {
-						sh ("git checkout master")
+						sh "git branch --show-current"
+						// sh ("git checkout master")
 						// sh ("git merge origin/master")
 						sh ("git add .")
 						sh ("git commit -m '[ci skip]'")
